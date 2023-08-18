@@ -6,6 +6,8 @@
 # the GNU General Public License Version 2. See the COPYING file
 # at the top of the source tree.
 
+AST_SRC_DIR:=/usr/src/asterisk-20.4.0
+
 ASTLIBDIR:=$(shell awk '/moddir/{print $$3}' /etc/asterisk/asterisk.conf 2> /dev/null)
 ifeq ($(strip $(ASTLIBDIR)),)
 	MODULES_DIR:=$(INSTALL_PREFIX)/usr/lib/asterisk/modules
@@ -22,7 +24,7 @@ OPTIMIZE:=-O2
 DEBUG:=-g
 
 #LIBS+=-
-CFLAGS+=-pipe -fPIC -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -D_REENTRANT -D_GNU_SOURCE -DAST_MODULE_SELF_SYM=__internal_app_audiofork_self
+CFLAGS+=-pipe -fPIC -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -D_REENTRANT -D_GNU_SOURCE -DAST_MODULE_SELF_SYM=__internal_app_audiofork_self -I$(AST_SRC_DIR)/include
 
 all: app_audiofork.so
 	@echo " +-------- app_audiofork Build Complete --------+"
